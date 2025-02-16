@@ -36,6 +36,13 @@ jobs:
           echo "${{ secrets.ACCESS_KEY_SSH }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          
+      - name: Terraform Init (Reinitialize if necessary)
+        run: |
+          rm -rf .terraform
+          rm .terraform.lock.hcl
+          terraform init
+
 
       # Step 5: Initialize Terraform (Ensure plugins and configuration are loaded)
       - name: Terraform Init
