@@ -37,18 +37,17 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           
-      - name: Terraform Init (Reinitialize if necessary)
-        run: |
-          rm -rf .terraform
-          rm .terraform.lock.hcl
-          terraform init
-
-
       # Step 5: Initialize Terraform (Ensure plugins and configuration are loaded)
       - name: Terraform Init
         run: |
           terraform init
           terraform validate  # Ensures Terraform configuration is valid
+
+      - name: Terraform Init (Reinitialize if necessary)
+        run: |
+          rm -rf .terraform
+          rm .terraform.lock.hcl
+          terraform init
 
       # Step 6: Checkout the Terraform repository containing the EC2 configuration
       - name: Checkout Terraform repository
