@@ -40,16 +40,16 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      # Step 5: Checkout Different Repository
+      # Step 5: Initialize Terraform
+      - name: Terraform Init
+        run: terraform init
+        
+      # Step 6: Checkout Different Repository
       - name: Checkout Different Repository
         run: |
           git clone git@github.com:bh-gaur/terraform.git 
           cd terraform/AWS/EC2
           ls
-
-      # Step 6: Initialize Terraform
-      - name: Terraform Init
-        run: terraform init
 
       # Step 7: Plan Terraform deployment
       - name: Terraform Plan
