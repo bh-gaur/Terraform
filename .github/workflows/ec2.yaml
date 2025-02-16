@@ -1,0 +1,59 @@
+name: Terraform EC2 Instance Creation
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      # Step 2: Set up Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.4.0'  # Specify your Terraform version here
+
+      # Step 3: Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: 'us-east-1'  # Change to your desired region
+
+      # Step 4: Adding Key to machine
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ACCESS_KEY_SSH }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      # Step 5: Checkout Different Repository
+      - name: Checkout Different Repository
+        run: |
+          git clone git@github.com:bh-gaur/terraform.git 
+          cd terraform/AWS/EC2
+
+      # Step 6: Initialize Terraform
+      - name: Terraform Init
+        run: terraform init
+
+      # Step 7: Plan Terraform deployment
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      # Step 8: Apply Terraform plan to create EC2 instance
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
