@@ -1,6 +1,6 @@
-variable "count" {
+variable "num" {
     description = "number of instances"
-    type = integer
+    type = number
     default = 1
 }
 
