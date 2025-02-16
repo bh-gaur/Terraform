@@ -13,13 +13,13 @@ jobs:
     steps:
       # Step 1: Checkout the code from the repository
       - name: Checkout repository
-        uses: actions/checkout@v3  # Use the latest stable version
+        uses: actions/checkout@v3  # Use the latest stable version of actions/checkout
       
       # Step 2: Set up Terraform
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: '1.0.0'  # Specify your Terraform version here
+          terraform_version: '1.0.0'  # Specify your desired Terraform version here
 
       # Step 3: Configure AWS credentials
       - name: Configure AWS credentials
@@ -27,9 +27,9 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'us-east-1'  # Change to your desired region
+          aws-region: 'us-east-1'  # Change to your desired AWS region
 
-      # Step 4: Configure SSH (Add SSH key to the machine)
+      # Step 4: Configure SSH for accessing resources (if needed)
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh
@@ -37,21 +37,26 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      # Step 5: Initialize Terraform (only once)
+      # Step 5: Initialize Terraform (Ensure plugins and configuration are loaded)
       - name: Terraform Init
         run: |
           terraform init
-          terraform validate
+          terraform validate  # Ensures Terraform configuration is valid
 
-      # Step 6: Checkout the Terraform repository containing the EC2 config
+      # Step 6: Checkout the Terraform repository containing the EC2 configuration
       - name: Checkout Terraform repository
         run: |
           git clone git@github.com:bh-gaur/terraform.git
           cd terraform/AWS/EC2/
 
-      # Step 7: Plan and Apply Terraform deployment
-      - name: Terraform Plan & Apply
+      # Step 7: Terraform Plan (Prepare the deployment plan)
+      - name: Terraform Plan
         run: |
           cd terraform/AWS/EC2/
           terraform plan -out=tfplan
+
+      # Step 8: Apply the Terraform Plan to create EC2 instance
+      - name: Terraform Apply
+        run: |
+          cd terraform/AWS/EC2/
           terraform apply -auto-approve tfplan
