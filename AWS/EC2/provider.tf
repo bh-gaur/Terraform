@@ -12,7 +12,6 @@ terraform {
 provider "aws" {
   region = "us-east-1"
   profile = "bhola-aws"
-  version = "~> 0.13"
 }
 
 
