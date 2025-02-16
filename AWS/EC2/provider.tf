@@ -9,14 +9,14 @@ terraform {
   }
 }
 
-provider "aws" {
-  region = "us-east-1"
-}
+# provider "aws" {
+#   region = "us-east-1"
+# }
 
 
 
 # provider "aws" {
-#   region = "us-west-2"
-#   access_key = "your-access-key"     # Alternatively, use environment variables
+#   region = "us-west-1"
+#   access_key = "secrets.AWS_ACCESS_KEY_ID"     # Alternatively, use environment variables
 #   secret_access_key = "your-secret-key"  # Alternatively, use environment variables
 # }

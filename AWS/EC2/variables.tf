@@ -7,19 +7,19 @@ variable "count" {
 variable "ami_id" {
     description = "ami id of instance"
     type = string
-    default = ""
+    default = "ami-0c52dbf4bc4be3465"
 }
 
 variable "instance_type" {
     description = "type of instance"
     type = string
-    default = ""
+    default = "t2.micro"
 }
 
 variable "key_name" {
     description = "key for instance"
     type = string
-    default = ""
+    default = "bhola-ubuntu"
 }
 
 variable "name" {
@@ -28,8 +28,8 @@ variable "name" {
     default = "test-instance"
 }
 
-variable "vpc_security_group_ids" {
-    description = "security group ids"
+variable "security_groups" {
+    description = "security group for instance"
     type = string
-    default = ""  
+    default = "macbook"
 }
