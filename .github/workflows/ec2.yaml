@@ -33,12 +33,12 @@ jobs:
           aws-region: 'us-east-1'  # Change to your desired region
 
       # Step 4: Adding Key to machine
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.ACCESS_KEY_SSH }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      # - name: Configure SSH
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     echo "${{ secrets.ACCESS_KEY_SSH }}" > ~/.ssh/id_rsa
+      #     chmod 600 ~/.ssh/id_rsa
+      #     ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       # Step 5: Checkout Different Repository
       - name: Checkout Different Repository
@@ -52,8 +52,8 @@ jobs:
 
       # Step 7: Plan Terraform deployment
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        run: terraform plan # -out=tfplan
 
       # Step 8: Apply Terraform plan to create EC2 instance
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply # -auto-approve tfplan
