@@ -56,6 +56,8 @@ jobs:
           cd terraform/AWS/EC2/
           ls
           terraform plan # -out=tfplan
+          terraform init
+          terraform plan
 
       # Step 8: Apply Terraform plan to create EC2 instance
       - name: Terraform Apply
