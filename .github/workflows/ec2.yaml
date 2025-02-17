@@ -6,7 +6,7 @@ on:
     branches:
       - 'main'
     paths:
-      - 'aws/ec2'
+      - 'aws/ec2/*'
   pull_request:
     branches:
       - 'main'
@@ -50,7 +50,7 @@ jobs:
       # Step 5: Initialize Terraform (Ensure plugins and configuration are loaded)
       - name: Terraform Init
         run: |
-          cd terraform/aws/ec2/
+          cd terraform/AWS/EC2/
           terraform init
           terraform validate  # Ensures Terraform configuration is valid
 
@@ -66,11 +66,11 @@ jobs:
       # Step 7: Terraform Plan (Prepare the deployment plan)
       - name: Terraform Plan
         run: |
-          cd terraform/aws/ec2/
+          cd terraform/AWS/EC2/
           terraform plan -out=tfplan
 
       # Step 8: Apply the Terraform Plan to create EC2 instance
       - name: Terraform Apply
         run: |
-          cd terraform/aws/ec2/
+          cd terraform/AWS/EC2/
           terraform apply -auto-approve tfplan
