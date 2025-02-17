@@ -1,6 +1,6 @@
 # Create EC2 machine 
 
-resource "aws_instance" "ec2_machine" {
+resource "aws_instance" "EC2" {
     count = var.num                 # how many instance will create
     ami = var.ami_id                  # ami_id for instance
     instance_type = var.instance_type # instance type 

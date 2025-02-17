@@ -25,7 +25,7 @@ variable "key_name" {
 variable "name" {
     description = "name of instance"
     type = string
-    default = "test-instance"
+    default = "bhola-terraform-instance"
 }
 
 variable "security_groups" {
