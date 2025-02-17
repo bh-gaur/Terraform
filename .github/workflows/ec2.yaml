@@ -6,7 +6,7 @@ on:
     branches:
       - 'main'
     paths:
-      - 'aws/ec2/*'
+      - 'aws/ec2'
   pull_request:
     branches:
       - 'main'
