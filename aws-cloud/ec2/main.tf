@@ -15,22 +15,22 @@ resource "aws_instance" "my_instance" {
               #!/bin/bash
 
               # Update package list
-              apt update
+              # apt update
 
-              # Install required dependencies
-              apt install -y curl gnupg2 ca-certificates lsb-release ubuntu-keyring
+              # # Install required dependencies
+              # apt install -y curl gnupg2 ca-certificates lsb-release ubuntu-keyring
 
-              # Add the Nginx signing key
-              curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+              # # Add the Nginx signing key
+              # curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
 
-              # Import the key to verify the Nginx repository
-              gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
+              # # Import the key to verify the Nginx repository
+              # gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
 
-              # Add Nginx repository
-              echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" | tee /etc/apt/sources.list.d/nginx.list
+              # # Add Nginx repository
+              # echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" | tee /etc/apt/sources.list.d/nginx.list
 
-              # Update package list again after adding the new repo
-              apt update
+              # # Update package list again after adding the new repo
+              # apt update
 
               # Install Nginx
               apt install -y nginx
