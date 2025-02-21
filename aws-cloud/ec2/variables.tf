@@ -31,5 +31,5 @@ variable "name" {
 variable "security_groups" {
     description = "security group for instance"
     type = string
-    default = "web_sg"
+    default = "default"
 }
