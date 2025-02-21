@@ -2,11 +2,11 @@ name: Terraform EC2 Instance Creation
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - 'main'
-    paths:
-      - 'aws-cloud/ec2/*'
+  # push:
+  #   branches:
+  #     - 'main'
+  #   paths:
+  #     - 'aws-cloud/ec2/*'
   # pull_request:
   #   branches:
   #     - 'main'
