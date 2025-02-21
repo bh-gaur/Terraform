@@ -14,7 +14,6 @@ provider "aws" {
 }
 
 
-
 # provider "aws" {
 #   region = "us-west-1"
 #   access_key = "secrets.AWS_ACCESS_KEY_ID"     # Alternatively, use environment variables
